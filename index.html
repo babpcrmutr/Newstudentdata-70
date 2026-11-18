@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ระบบติดตามผู้สมัคร ปีการศึกษา 2570</title>
+  <style>
+    :root { --navy:#12345a; --blue:#1769aa; --teal:#1c9a91; --gold:#e8ad43; --ink:#213247; --muted:#718096; --line:#e5ebf1; --bg:#f3f6fa; --white:#fff; }
+    * { box-sizing:border-box }
+    body { margin:0; background:linear-gradient(rgba(243,246,250,.82),rgba(243,246,250,.86)),url("assets/page-background.png") center top / cover fixed; color:var(--ink); font:15px/1.55 "Noto Sans Thai", "Leelawadee UI", Tahoma, sans-serif }
+    button,input,select { font:inherit }
+    .site-cover{width:100%;height:clamp(110px,25vw,400px);overflow:hidden;background:#eaf4fc}.site-cover img{display:block;width:100%;height:100%;object-fit:cover;object-position:center}
+    .topbar { position:relative;isolation:isolate;overflow:hidden;background:linear-gradient(115deg,#102f52 5%,#1769aa 72%,#2188b0);color:white;min-height:112px;padding:18px max(24px,calc((100vw - 1240px)/2));display:flex;align-items:center;justify-content:space-between;gap:18px }
+    .brand { display:flex;gap:14px;align-items:center;position:relative;z-index:1 }
+    .logo { width:46px;height:46px;border-radius:14px;background:#ffffff1c;display:grid;place-items:center;font-size:25px }
+    h1 {font-size:20px;line-height:1.35;margin:0;font-weight:750}.subtitle{color:#d6e6f4;font-size:13px;margin-top:4px}
+    .top-actions{display:flex;align-items:center;gap:10px;position:relative;z-index:2}.year-pill{padding:7px 12px;border:1px solid #ffffff55;border-radius:999px;font-size:13px}.schedule-button{border:1px solid #ffffff70;background:#ffffff;color:#16446d;border-radius:9px;padding:8px 12px;font-weight:650;cursor:pointer}.schedule-button:hover{background:#edf6fc}
+    .wrap{max-width:1240px;margin:24px auto;padding:0 22px 50px}
+    .notice{display:flex;gap:10px;align-items:flex-start;background:#fff8e8;border:1px solid #f3dfb5;border-radius:12px;padding:12px 15px;color:#76551c;font-size:13px;margin-bottom:18px}
+    .notice b{white-space:nowrap}
+    .section-head{display:flex;align-items:end;justify-content:space-between;gap:12px;margin:24px 0 12px}.section-head h2{font-size:18px;margin:0}.section-head p{font-size:13px;color:var(--muted);margin:3px 0 0}
+    .updated{font-size:12px;color:var(--muted)}
+    .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+    .stat{background:var(--white);border:1px solid var(--line);border-radius:15px;padding:17px 18px;box-shadow:0 3px 10px #193c5a08}
+    .stat-label{font-size:13px;color:var(--muted);display:flex;justify-content:space-between;align-items:center}.stat-icon{width:31px;height:31px;border-radius:10px;display:grid;place-items:center;background:#eaf3fb;font-size:16px}
+    .stat-value{font-size:29px;font-weight:750;margin-top:8px;color:var(--navy)}.stat-foot{font-size:12px;color:var(--muted);margin-top:2px}
+    .toolbar{background:white;border:1px solid var(--line);border-radius:14px;padding:13px;display:flex;flex-wrap:wrap;gap:9px;align-items:center}
+    .search{position:relative;flex:1 1 230px}.search span{position:absolute;left:12px;top:8px;color:#91a0af}.search input{padding-left:36px;width:100%}
+    input,select{border:1px solid #dce4ec;background:#fff;color:var(--ink);border-radius:9px;padding:9px 11px;outline:none}input:focus,select:focus{border-color:#5ca3d8;box-shadow:0 0 0 3px #1675b51a}
+    .btn{border:0;border-radius:9px;background:var(--navy);color:white;padding:9px 13px;cursor:pointer}.btn.secondary{background:#edf3f8;color:#24425f}.btn:hover{filter:brightness(1.07)}
+    .program-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:13px;margin-top:13px}
+    .program{background:white;border:1px solid var(--line);border-radius:14px;padding:15px;cursor:pointer;transition:.15s;position:relative;overflow:hidden}.program:hover,.program.active{border-color:#66a7d5;box-shadow:0 5px 17px #174f7d16;transform:translateY(-1px)}.program.active:before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--teal)}
+    .program-head{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}.program h3{font-size:15px;margin:0;line-height:1.45}.code{color:var(--muted);font-size:11px;white-space:nowrap}.program-sub{font-size:12px;color:var(--muted);margin-top:4px}
+    .mini-metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:15px}.mini-metric{border-top:1px solid #edf1f5;padding-top:9px}.mini-metric strong{display:block;font-size:18px}.mini-metric span{font-size:11px;color:var(--muted)}
+    .progress-head{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-top:11px}.progress{height:6px;background:#edf1f4;border-radius:5px;margin-top:5px;overflow:hidden}.progress i{display:block;height:100%;background:linear-gradient(90deg,#20a39a,#72c3a8);border-radius:5px}
+    .detail-panel{background:white;border:1px solid var(--line);border-radius:15px;margin-top:22px;overflow:hidden}.detail-title{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:17px 18px;border-bottom:1px solid var(--line)}.detail-title h2{font-size:17px;margin:0}.detail-title p{color:var(--muted);font-size:12px;margin:3px 0 0}
+    .detail-stats{display:flex;gap:20px;flex-wrap:wrap;padding:12px 18px;background:#f9fbfd;border-bottom:1px solid var(--line);font-size:13px}.detail-stats b{color:var(--navy)}
+    .table-wrap{overflow:auto}table{width:100%;border-collapse:collapse;min-width:920px}th,td{padding:11px 14px;border-bottom:1px solid #edf1f5;text-align:left;font-size:13px;white-space:nowrap}th{background:#f8fafc;color:#5c6e80;font-weight:650;position:sticky;top:0}tbody tr:hover{background:#f8fbfe}.empty{text-align:center;color:var(--muted);padding:30px}
+    .badge{display:inline-flex;align-items:center;border-radius:999px;padding:3px 9px;font-size:11px;font-weight:650}.ok{background:#e7f6ef;color:#20744e}.pending{background:#fff4dd;color:#946813}.no{background:#f0f2f5;color:#6e7782}
+    .pagination{padding:12px 16px;display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:12px}.page-buttons{display:flex;gap:6px}.page-buttons button{border:1px solid var(--line);background:#fff;border-radius:7px;padding:5px 9px;cursor:pointer;color:var(--ink)}.page-buttons button:disabled{opacity:.45;cursor:default}
+    .footnote{font-size:12px;color:var(--muted);margin-top:16px}
+    .schedule-panel{background:#fff;border:1px solid var(--line);border-radius:15px;margin:18px 0 22px;overflow:hidden}.schedule-panel[hidden]{display:none}.schedule-caption{padding:15px 18px;background:#f9fbfd;border-bottom:1px solid var(--line);font-size:13px;color:var(--muted)}.schedule-caption strong{color:var(--navy);font-size:16px;display:block;margin-bottom:3px}.schedule-table{min-width:1050px}.schedule-table th{white-space:normal;min-width:120px}.schedule-table td{white-space:normal;min-width:120px}.schedule-table td:first-child{font-weight:650;color:var(--navy)}.schedule-table .instruction-row td{background:#fff8e8;color:#76551c;font-size:12px}.schedule-link{color:#1769aa;font-weight:650;text-decoration:none}.schedule-link:hover{text-decoration:underline}
+    @media(max-width:850px){.stats{grid-template-columns:repeat(2,1fr)}.program-grid{grid-template-columns:repeat(2,1fr)}.topbar{padding:18px 22px}}
+    @media(max-width:560px){body{background-attachment:scroll}.topbar{align-items:center;min-height:104px;padding:14px}.top-actions{align-self:center}.brand{max-width:64%}h1{font-size:17px}.year-pill{display:none}.wrap{padding:0 13px 35px;margin-top:16px}.stats{gap:9px}.stat{padding:13px}.stat-value{font-size:24px}.program-grid{grid-template-columns:1fr}.section-head{align-items:flex-start;flex-direction:column}.notice{font-size:12px}.detail-title{align-items:flex-start;flex-direction:column}}
+  </style>
+</head>
+<body>
+  <div class="site-cover"><img src="assets/header.jpg" alt="คณะบริหารธุรกิจ มหาวิทยาลัยเทคโนโลยีราชมงคลรัตนโกสินทร์ บพิตรพิมุข จักรวรรดิ"></div>
+  <header class="topbar">
+    <div class="brand"><div class="logo">🎓</div><div><h1>ระบบติดตามผู้สมัครเข้าศึกษาต่อ</h1><div class="subtitle">คณะบริหารธุรกิจ · บพิตรพิมุข จักรวรรดิ</div></div></div>
+    <div class="top-actions"><button class="schedule-button" id="toggleSchedule" aria-expanded="false" aria-controls="scheduleSection">📅 กำหนดการรายงานตัว</button><span class="year-pill">ปีการศึกษา 2570</span></div>
+  </header>
+  <main class="wrap">
+    <div class="notice"><span>🔒</span><div><b>ข้อมูลจากชีตสาขา</b> ยอดรวมคำนวณจากรายชื่อในแต่ละแท็บ หน้าเว็บไม่แสดงเบอร์โทรศัพท์ แต่ลิงก์ CSV ที่เผยแพร่สามารถเปิดดูข้อมูลดิบได้ ควรใช้ระบบยืนยันตัวตนก่อนนำข้อมูลจริงไปเผยแพร่</div></div>
+    <div class="section-head"><div><h2>ภาพรวมการรับสมัคร</h2><p>สรุปจากแท็บข้อมูลของแต่ละสาขาวิชา</p></div><div class="updated" id="dataStatus">กำลังเชื่อมข้อมูลแท็บสาขา…</div></div>
+    <section class="stats" id="stats"></section>
+    <section class="schedule-panel" id="scheduleSection" hidden>
+      <div class="detail-title"><div><h2>กำหนดการรายงานตัว</h2><p id="scheduleStatus">กำลังเชื่อมข้อมูลจากชีตกำหนดการ…</p></div><button class="btn secondary" id="closeSchedule">ปิดตาราง</button></div>
+      <div class="schedule-caption"><strong>กำหนดการส่งรายชื่อ แจ้งผล และรายงานตัว</strong>ปีการศึกษา 2570 · รอบโควตารับตรงพิเศษ</div>
+      <div class="table-wrap"><table class="schedule-table"><thead id="scheduleHead"></thead><tbody id="scheduleRows"><tr><td class="empty" colspan="8">กำลังโหลดกำหนดการ…</td></tr></tbody></table></div>
+    </section>
+    <div class="section-head"><div><h2>สรุปตามสาขาวิชา</h2><p>เลือกสาขาเพื่อดูข้อมูลรายละเอียด</p></div></div>
+    <div class="toolbar">
+      <div class="search"><span>⌕</span><input id="programSearch" placeholder="ค้นหาสาขาวิชา…" aria-label="ค้นหาสาขาวิชา"></div>
+      <select id="programSort" aria-label="เรียงสาขาวิชา"><option value="default">เรียงตามชีต</option><option value="applicants">ผู้สมัครมากไปน้อย</option><option value="report">ผู้รายงานตัวมากไปน้อย</option><option value="rate">อัตรารายงานตัวสูงไปต่ำ</option></select>
+    </div>
+    <section class="program-grid" id="programs"></section>
+    <section class="detail-panel" id="detail">
+      <div class="detail-title"><div><h2 id="detailName">รายละเอียดผู้สมัครแยกตามสาขาวิชา</h2><p id="detailHint">แสดงรายชื่อและสถานะจากแท็บข้อมูลของแต่ละสาขา</p></div><button class="btn secondary" id="clearFilters">ล้างตัวกรอง</button></div>
+      <div class="detail-stats" id="detailStats" hidden></div>
+      <div class="toolbar" style="border:0;border-radius:0;border-bottom:1px solid var(--line)">
+        <select id="branchSelect" aria-label="เลือกสาขาวิชา"></select>
+        <select id="statusFilter" disabled><option value="all">ทุกสถานะ</option><option value="reported">รายงานตัวแล้ว</option><option value="paid">ชำระค่าเทอมเต็มจำนวน</option><option value="partial">ชำระบางส่วน</option><option value="pending">ยังไม่ชำระ</option></select>
+      </div>
+      <div class="table-wrap"><table><thead><tr><th>ลำดับ</th><th>รหัสนักศึกษา</th><th>ชื่อ–นามสกุล</th><th>รอบสมัคร</th><th>สถานะรายงานตัว</th><th>สถานะชำระค่าเทอม</th></tr></thead><tbody id="applicantRows"><tr><td class="empty" colspan="6">กำลังโหลดรายชื่อผู้สมัคร</td></tr></tbody></table></div>
+      <div class="pagination"><span id="pageInfo">—</span><div class="page-buttons"><button id="prevPage" disabled>ก่อนหน้า</button><button id="nextPage" disabled>ถัดไป</button></div></div>
+    </section>
+    <p class="footnote">หมายเหตุ: จำนวนสรุปมาจากแท็บ “รายงานจำนวน” ในชีต ณ เวลาที่อ่านข้อมูล ส่วนข้อมูลบุคคลในตารางเป็นข้อมูลสมมติสำหรับต้นแบบ</p>
+  </main>
+  <script>
+    // Each program links to its own sheet tab by gid. The spreadsheet's "Publish to web"
+    // setting must include these tabs before the public CSV endpoints can be read.
+    const SPREADSHEET_PUB_ID = '2PACX-1vSGhHTt8FhNTbBJCxx-u8GGn0PM6Mz1c3m_LQswl65mNroCp9Ey38iUdm1fJyuK2vBePV04cWR0F_S5';
+    const SCHEDULE_GID = '361117066';
+    const programConfig = [
+      {code:'0527',name:'บช.บ. การบัญชี',gid:'1386703394'},
+      {code:'0532',name:'บช.บ. การบัญชี (เทียบโอนรายวิชา)',gid:'1213710245'},
+      {code:'0528',name:'บธ.บ. ภาษาอังกฤษธุรกิจ',gid:'901277965'},
+      {code:'0529',name:'บธ.บ. การตลาดดิจิทัล',gid:'939955960'},
+      {code:'0530',name:'บธ.บ. เทคโนโลยีทางธุรกิจดิจิทัล',gid:'1072964045'},
+      {code:'0531',name:'บธ.บ. บริหารธุรกิจ (หลักสูตรภาษาจีน)',gid:'2134570250'},
+      {code:'0533',name:'บธ.บ. นวัตกรรมการจัดการและโลจิสติกส์',gid:'1209675388'},
+      {code:'0534',name:'บธ.บ. นวัตกรรมการประกอบการสร้างสรรค์',gid:'977243056'}
+    ];
+    let programs = programConfig.map(p=>({...p,applied:0,reported:0,paid:0,partial:0,unpaid:0,applicants:[]}));
+    let selected = null, page = 1, pageSize = 8;
+    const fmt=n=>Number(n||0).toLocaleString('th-TH');
+    function totals(){return programs.reduce((a,p)=>({plan:a.plan+(Number(p.plan)||0),applied:a.applied+p.applied,reported:a.reported+p.reported,paid:a.paid+p.paid,partial:a.partial+p.partial,unpaid:a.unpaid+p.unpaid}),{plan:0,applied:0,reported:0,paid:0,partial:0,unpaid:0})}
+    function renderStats(){const t=totals();const planSources=programs.filter(p=>p.plan!=null).length;const cards=[['แผนรับที่ระบุในชีต',t.plan,`ระบุแผนรับใน ${planSources}/${programs.length} แท็บสาขา`,'🎯'],['ผู้สมัครทั้งหมด',t.applied,'นับจากรายชื่อในแท็บสาขา','📝'],['รายงานตัวแล้ว',t.reported,`${(t.reported/Math.max(t.applied,1)*100).toFixed(1)}% ของผู้สมัคร`,'👤'],['ชำระค่าเทอมเต็มจำนวน',t.paid,`ชำระบางส่วน ${fmt(t.partial)} คน`,'฿']];document.querySelector('#stats').innerHTML=cards.map(x=>`<article class="stat"><div class="stat-label">${x[0]}<span class="stat-icon">${x[3]}</span></div><div class="stat-value">${fmt(x[1])}</div><div class="stat-foot">${x[2]}</div></article>`).join('')}
+    function renderPrograms(){let list=[...programs];const q=document.querySelector('#programSearch').value.trim().toLowerCase();if(q)list=list.filter(p=>(p.name+p.code).toLowerCase().includes(q));const s=document.querySelector('#programSort').value;if(s==='applicants')list.sort((a,b)=>b.applied-a.applied);if(s==='report')list.sort((a,b)=>b.reported-a.reported);if(s==='rate')list.sort((a,b)=>(b.paid/Math.max(b.applied,1))-(a.paid/Math.max(a.applied,1)));document.querySelector('#programs').innerHTML=list.map(p=>`<article class="program ${selected?.code===p.code?'active':''}" data-code="${p.code}"><div class="program-head"><h3>${p.name}</h3><span class="code">${p.code}</span></div><div class="program-sub">แผนรับ ${p.plan==null?'ไม่ระบุในแท็บ':`${fmt(p.plan)} คน`}</div><div class="mini-metrics"><div class="mini-metric"><strong>${fmt(p.applied)}</strong><span>มีรายชื่อ</span></div><div class="mini-metric"><strong>${fmt(p.reported)}</strong><span>รายงานตัวแล้ว</span></div><div class="mini-metric"><strong>${fmt(p.paid)}</strong><span>ชำระเต็ม</span></div><div class="mini-metric"><strong>${fmt(p.partial)}</strong><span>ชำระบางส่วน</span></div></div><div class="progress-head"><span>ชำระเต็มเทียบแผนรับ</span><b>${p.plan?`${(p.paid/p.plan*100).toFixed(1)}%`:'ไม่มีข้อมูลแผนรับ'}</b></div><div class="progress"><i style="width:${p.plan?Math.min(p.paid/p.plan*100,100):0}%"></i></div></article>`).join('');document.querySelectorAll('.program').forEach(el=>el.onclick=()=>selectProgram(el.dataset.code))}
+    function selectProgram(code){selected=programs.find(p=>p.code===code);if(!selected)return;page=1;document.querySelector('#branchSelect').value=selected.code;document.querySelector('#detailName').textContent=`รายละเอียดผู้สมัคร · ${selected.name}`;document.querySelector('#detailHint').textContent=`สาขาวิชา ${selected.name} · รหัส ${selected.code}`;document.querySelector('#detailStats').hidden=false;document.querySelector('#detailStats').innerHTML=`<span>แผนรับ <b>${selected.plan==null?'ไม่ระบุในแท็บ':fmt(selected.plan)}</b></span><span>มีรายชื่อ <b>${fmt(selected.applied)}</b></span><span>รายงานตัวแล้ว <b>${fmt(selected.reported)}</b></span><span>ชำระเต็ม <b>${fmt(selected.paid)}</b></span><span>ชำระบางส่วน <b>${fmt(selected.partial)}</b></span>`;document.querySelector('#statusFilter').disabled=false;renderPrograms();renderApplicants()}
+    function renderBranchOptions(){document.querySelector('#branchSelect').innerHTML=programs.map(p=>`<option value="${p.code}">${p.name}</option>`).join('');}
+    function badge(v){let c=(v==='รายงานตัวแล้ว'||v==='ชำระค่าเทอมเต็มจำนวน')?'ok':(v==='ชำระบางส่วน'||v==='ยังไม่ระบุ')?'pending':'no';return `<span class="badge ${c}">${v}</span>`}
+    function filteredApplicants(){let arr=selected?.applicants||[];const f=document.querySelector('#statusFilter').value;if(f==='reported')arr=arr.filter(r=>/รายงานตัวแล้ว/.test(r[3]));if(f==='paid')arr=arr.filter(r=>r[4]==='ชำระค่าเทอมเต็มจำนวน');if(f==='partial')arr=arr.filter(r=>r[4]==='ชำระบางส่วน');if(f==='pending')arr=arr.filter(r=>r[4]==='ยังไม่ชำระ');return arr}
+    function renderApplicants(){const all=filteredApplicants(),max=Math.max(1,Math.ceil(all.length/pageSize)),start=(page-1)*pageSize;const view=all.slice(start,start+pageSize);document.querySelector('#applicantRows').innerHTML=view.length?view.map((r,i)=>`<tr><td>${start+i+1}</td><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td>${badge(r[3])}</td><td>${badge(r[4])}</td></tr>`).join(''):`<tr><td class="empty" colspan="6">${selected?'ไม่พบข้อมูลในแท็บนี้ หรือยังไม่ได้เปิดเผยแท็บสาขาเพื่ออ่านข้อมูล':'เลือกสาขาวิชาเพื่อดูรายการ'}</td></tr>`;document.querySelector('#pageInfo').textContent=all.length?`แสดงลำดับ ${start+1}–${Math.min(start+pageSize,all.length)} จาก ${all.length} รายการ`:'ไม่มีรายการ';document.querySelector('#prevPage').disabled=page<=1;document.querySelector('#nextPage').disabled=page>=max}
+    function parseCSV(text){const rows=[];let row=[],cell='',quoted=false;for(let i=0;i<text.length;i++){const c=text[i];if(c==='"'&&text[i+1]==='"'&&quoted){cell+='"';i++}else if(c==='"')quoted=!quoted;else if(c===','&&!quoted){row.push(cell);cell=''}else if((c==='\n'||c==='\r')&&!quoted){if(c==='\r'&&text[i+1]==='\n')i++;row.push(cell);if(row.some(x=>x.trim()))rows.push(row);row=[];cell=''}else cell+=c}row.push(cell);if(row.some(x=>x.trim()))rows.push(row);return rows}
+    const escapeHTML=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    let scheduleLoaded=false;
+    async function loadSchedule(){
+      if(scheduleLoaded)return;
+      const status=document.querySelector('#scheduleStatus');
+      try{
+        const url=`https://docs.google.com/spreadsheets/d/e/${SPREADSHEET_PUB_ID}/pub?gid=${SCHEDULE_GID}&single=true&output=csv`;
+        const response=await fetch(url);if(!response.ok)throw Error('โหลดชีตไม่ได้');
+        const rows=parseCSV(await response.text());
+        const headerIndex=rows.findIndex(r=>r.some(c=>c.trim()==='เดือน')&&r.some(c=>/ส่งรายชื่อ/.test(c)));
+        if(headerIndex<0)throw Error('ไม่พบหัวตารางกำหนดการ');
+        const header=rows[headerIndex];
+        const body=rows.slice(headerIndex+1).filter(r=>r.some(v=>v.trim()));
+        const instructions=body.find(r=>r.some(v=>/ทุกวัน/.test(v)));
+        const dates=body.filter(r=>r.some(v=>/\d{1,2}\s+\S+\s+25\d{2}/.test(v)));
+        let currentMonth='';
+        const idx={month:header.findIndex(v=>v.trim()==='เดือน'),submit:header.findIndex(v=>/ส่งรายชื่อ/.test(v)),email:header.findIndex(v=>/อีเมล์/.test(v)),call:header.findIndex(v=>/โทรศัพท์/.test(v)),report:header.findIndex(v=>/สามารถรายงานตัว/.test(v)),round:header.findIndex(v=>/รอบที่ประกาศ/.test(v)),announce:header.findIndex(v=>/วันที่ประกาศ/.test(v)),link:header.findIndex(v=>/ลิงก์ประกาศ/.test(v))};
+        const cell=(r,i)=>i>=0?(r[i]||'').trim():'';
+        document.querySelector('#scheduleHead').innerHTML=`<tr>${header.map(v=>`<th>${escapeHTML(v)}</th>`).join('')}</tr>`;
+        let html='';
+        if(instructions){html+=`<tr class="instruction-row">${header.map((_,i)=>`<td>${escapeHTML(cell(instructions,i)||'—')}</td>`).join('')}</tr>`}
+        html+=dates.map(r=>{
+          const month=cell(r,idx.month);if(month)currentMonth=month;
+          const cells=header.map((_,i)=>{
+            const value=cell(r,i);
+            if(i===idx.month)return escapeHTML(month||currentMonth||'—');
+            if(i===idx.link){if(!value)return '—';try{const link=new URL(value);if(link.protocol!=='https:')return '—';return `<a class="schedule-link" href="${escapeHTML(link.href)}" target="_blank" rel="noopener noreferrer">เปิดประกาศ</a>`}catch{return '—'}}
+            return escapeHTML(value||'—');
+          }).join('');return `<tr>${cells}</tr>`;
+        }).join('');
+        document.querySelector('#scheduleRows').innerHTML=html||`<tr><td class="empty" colspan="${header.length}">ไม่พบรายการกำหนดการ</td></tr>`;
+        status.textContent=`แสดง ${dates.length} รายการ จากแท็บ “กำหนดการรายงานตัว”`;
+        scheduleLoaded=true;
+      }catch(error){status.textContent='เชื่อมข้อมูลกำหนดการไม่สำเร็จ';document.querySelector('#scheduleRows').innerHTML='<tr><td class="empty" colspan="8">ตรวจสอบว่าชีตกำหนดการเปิดเผยสำหรับการอ่านข้อมูลแล้ว</td></tr>';console.info('โหลดกำหนดการไม่สำเร็จ',error.message)}
+    }
+    function reportStatus(v){const s=(v||'').trim();if(/รายงานตัวแล้ว/.test(s))return 'รายงานตัวแล้ว';if(/สละสิทธิ์/.test(s))return 'สละสิทธิ์';return s||'ยังไม่ระบุ'}
+    function paymentStatus(v){const s=(v||'').trim();if(!s)return 'ยังไม่ระบุ';if(/ยังไม่ชำระ|ไม่ชำระ|รอชำระ/.test(s))return 'ยังไม่ชำระ';if(/บางส่วน|ครึ่งหนึ่ง|50\s*%|ครึ่ง/.test(s))return 'ชำระบางส่วน';if(/เต็มจำนวน|ชำระแล้ว/.test(s))return 'ชำระค่าเทอมเต็มจำนวน';if(/ชำระ/.test(s))return 'ชำระบางส่วน';return s}
+    function parseApplicantSheet(rows,program){
+      const headerIndex=rows.findIndex(r=>r.some(c=>/ลำดับ/.test(c))&&r.some(c=>/^ชื่อ$/.test(c.trim()))&&r.some(c=>/^นามสกุล$/.test(c.trim())));
+      const planCell=rows.flat().find(c=>/แผนรับ\s*\d+/.test(c));
+      const planMatch=planCell?.match(/แผนรับ\s*(\d+)/);
+      const plan=planMatch?Number(planMatch[1]):null;
+      if(headerIndex<0)return {summary:{plan,applied:0,reported:0,paid:0,partial:0,unpaid:0},applicants:[]};
+      const headers=rows[headerIndex].map(v=>(v||'').trim());
+      const find=(patterns)=>headers.findIndex(h=>patterns.some(p=>p.test(h)));
+      const col={id:find([/รหัสนักศึกษา/,/รหัสผู้สมัคร/,/เลขที่สมัคร/,/รหัสสมัคร/]),prefix:find([/คำนำหน้า/]),first:find([/^ชื่อ$/]),last:find([/^นามสกุล$/]),report:find([/สถานะ.*รายงานตัว/,/รายงานตัว/]),payment:find([/สถานะ.*ชำระ/,/ชำระ.*ค่าเทอม/,/การชำระ/]),round:find([/^รอบ$/,/รอบสมัคร/])};
+      const list=rows.slice(headerIndex+1).filter(r=>col.first>=0&&(r[col.first]||'').trim()).map(r=>{const fullName=[col.prefix>=0?r[col.prefix]:'',col.first>=0?r[col.first]:'',col.last>=0?r[col.last]:''].map(x=>(x||'').trim()).filter(Boolean).join(' ');return [col.id>=0?(r[col.id]||'').trim():'',fullName,col.round>=0?(r[col.round]||'').trim():'',reportStatus(col.report>=0?r[col.report]:''),paymentStatus(col.payment>=0?r[col.payment]:'')]});
+      return {summary:{plan,applied:list.length,reported:list.filter(r=>r[3]==='รายงานตัวแล้ว').length,paid:list.filter(r=>r[4]==='ชำระค่าเทอมเต็มจำนวน').length,partial:list.filter(r=>r[4]==='ชำระบางส่วน').length,unpaid:list.filter(r=>r[4]==='ยังไม่ชำระ').length},applicants:list};
+    }
+    async function loadProgramSheets(){
+      await Promise.all(programs.map(async p=>{try{const url=`https://docs.google.com/spreadsheets/d/e/${SPREADSHEET_PUB_ID}/pub?gid=${p.gid}&single=true&output=csv`;const response=await fetch(url);if(!response.ok)throw Error('อ่านไม่ได้');const rows=parseCSV(await response.text());const result=parseApplicantSheet(rows,p);Object.assign(p,result.summary,{applicants:result.applicants,loaded:true});}catch(e){p.loaded=false;console.info(`อ่านแท็บ ${p.name} ไม่ได้`,e.message)}}));
+      const loaded=programs.filter(p=>p.loaded).length;document.querySelector('#dataStatus').textContent=loaded===programs.length?`เชื่อมข้อมูลสำเร็จ ${loaded}/${programs.length} แท็บ`:`เชื่อมข้อมูลได้ ${loaded}/${programs.length} แท็บ`;
+      renderStats();renderPrograms();if(selected)renderApplicants();
+    }
+    document.querySelector('#programSearch').addEventListener('input',renderPrograms);document.querySelector('#programSort').addEventListener('change',renderPrograms);document.querySelector('#branchSelect').addEventListener('change',event=>selectProgram(event.target.value));document.querySelector('#statusFilter').addEventListener('change',()=>{page=1;renderApplicants()});document.querySelector('#prevPage').onclick=()=>{page--;renderApplicants()};document.querySelector('#nextPage').onclick=()=>{page++;renderApplicants()};document.querySelector('#clearFilters').onclick=()=>{document.querySelector('#statusFilter').value='all';page=1;renderApplicants()};
+    const scheduleSection=document.querySelector('#scheduleSection');
+    function toggleSchedule(show){scheduleSection.hidden=!show;document.querySelector('#toggleSchedule').setAttribute('aria-expanded',String(show));if(show){loadSchedule();scheduleSection.scrollIntoView({behavior:'smooth',block:'start'})}}
+    document.querySelector('#toggleSchedule').addEventListener('click',()=>toggleSchedule(scheduleSection.hidden));
+    document.querySelector('#closeSchedule').addEventListener('click',()=>toggleSchedule(false));
+    renderStats();renderPrograms();renderBranchOptions();selectProgram(programs[0].code);loadProgramSheets();
+  </script>
+</body>
+</html>
